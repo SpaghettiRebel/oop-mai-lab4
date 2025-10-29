@@ -1,0 +1,28 @@
+#pragma once
+#include "figure.hpp"
+#include <memory>
+#include <vector>
+
+template <Scalar T> class Rectangle : public Figure<T> {
+public:
+  using PointT = Point<T>;
+  Rectangle() = default;
+  Rectangle(T cx, T cy, T width, T height);
+
+  Rectangle(const Rectangle &other);
+  Rectangle(Rectangle &&) noexcept = default;
+  Rectangle &operator=(const Rectangle &other);
+  Rectangle &operator=(Rectangle &&) noexcept = default;
+
+  std::unique_ptr<Figure<T>> clone() const override;
+  PointT center() const override;
+  double area() const override;
+  void print(std::ostream &os) const override;
+  void read(std::istream &is) override;
+
+private:
+  std::vector<std::unique_ptr<PointT>> pts;
+  void set_by_center(T cx, T cy, T w, T h);
+};
+
+#include "rectangle.tpp"
