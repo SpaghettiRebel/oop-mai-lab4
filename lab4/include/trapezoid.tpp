@@ -37,8 +37,6 @@ template <Scalar T> typename Trapezoid<T>::PointT Trapezoid<T>::center() const {
 template <Scalar T> double Trapezoid<T>::area() const {
   if (pts.size() != 4)
     return 0.0;
-  // top a = distance between pts[0] and pts[1]; bottom b = distance between
-  // pts[2] and pts[3]
   double a = pts[0]->distTo(*pts[1]);
   double b = pts[2]->distTo(*pts[3]);
   double h = std::fabs(double(pts[0]->y) - double(pts[3]->y));
@@ -63,7 +61,6 @@ void Trapezoid<T>::set_by_center(T cx, T cy, T a, T b, T h) {
   pts.clear();
   T hh = h / T(2);
   T halfA = a / T(2), halfB = b / T(2);
-  // order: top-left, top-right, bot-right, bot-left
   pts.push_back(std::make_unique<PointT>(cx - halfA, cy + hh));
   pts.push_back(std::make_unique<PointT>(cx + halfA, cy + hh));
   pts.push_back(std::make_unique<PointT>(cx + halfB, cy - hh));

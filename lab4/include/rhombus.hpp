@@ -19,7 +19,7 @@ public:
   void read(std::istream &is) override;
 
 private:
-  std::vector<std::unique_ptr<PointT>> pts; // 4 vertices
+  std::vector<std::unique_ptr<PointT>> pts;
   void set_by_center(T cx, T cy, T d1, T d2);
 };
 

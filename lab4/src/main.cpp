@@ -21,7 +21,6 @@ int main() {
     arr_rects[i].print(std::cout);
     std::cout << "\n";
   }
-  std::cout << "-------------------------------------------\n";
 
   Array<std::shared_ptr<Figure<T>>> arr;
 
@@ -45,28 +44,31 @@ int main() {
         T cx, cy, w, h;
         std::cin >> cx >> cy >> w >> h;
         arr.push_back(std::make_shared<Rectangle<T>>(cx, cy, w, h));
+
       } else if (cmd == "2") {
         std::cout
             << "Введите cx cy верхнее_основание нижнее_основание height: ";
         T cx, cy, a, b, h;
         std::cin >> cx >> cy >> a >> b >> h;
         arr.push_back(std::make_shared<Trapezoid<T>>(cx, cy, a, b, h));
+
       } else if (cmd == "3") {
         std::cout << "Введите cx cy диагональ1 диагональ2: ";
         T cx, cy, d1, d2;
         std::cin >> cx >> cy >> d1 >> d2;
         arr.push_back(std::make_shared<Rhombus<T>>(cx, cy, d1, d2));
+
       } else if (cmd == "p") {
         for (size_t i = 0; i < arr.size(); ++i) {
-          std::cout << i << ": " << *arr[i]
-                    << "\n"; // operator<< для Figure<T> используется здесь
+          std::cout << i << ": " << *arr[i] << "\n";
         }
+
       } else if (cmd == "s") {
         double sum = 0.0;
         for (size_t i = 0; i < arr.size(); ++i)
-          sum += static_cast<double>(
-              *arr[i]); // operator double() у Figure возвращает площадь
+          sum += static_cast<double>(*arr[i]);
         std::cout << "  Суммарная площадь = " << sum << "\n";
+
       } else if (cmd == "d") {
         std::cout << "Введите индекс удаляемой фигуры (начиная с 0): ";
         size_t idx;
@@ -76,6 +78,7 @@ int main() {
         else {
           arr.remove_at(idx);
         }
+
       } else if (cmd == "0") {
         break;
       } else {

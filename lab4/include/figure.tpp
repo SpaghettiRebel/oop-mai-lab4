@@ -15,14 +15,12 @@ inline bool close_pt(const Point<T> &A, const Point<T> &B,
          close_d<T>(double(A.y), double(B.y), eps);
 }
 
-// Потоковый ввод: делегирует конкретным фигурам через read()
 template <Scalar T>
 inline std::istream &operator>>(std::istream &is, Figure<T> &f) {
   f.read(is);
   return is;
 }
 
-// Свободная operator==: сравнение площади и геометрического центра
 template <Scalar T>
 inline bool operator==(const Figure<T> &a, const Figure<T> &b) {
   if (!close_d<T>(a.area(), b.area()))

@@ -17,19 +17,14 @@ public:
   virtual void read(std::istream &is) = 0;
 
   explicit operator double() const { return area(); }
-
-  // УДАЛЕНО: член-метод operator==. Оставим свободную версию ниже.
 };
 
-// Потоковый вывод (оставляем inline)
 template <Scalar T>
 inline std::ostream &operator<<(std::ostream &os, const Figure<T> &f) {
   f.print(os);
   return os;
 }
 
-// Объявление свободной operator== (forward declaration)
 template <Scalar T> bool operator==(const Figure<T> &a, const Figure<T> &b);
 
-// Подключаем реализацию шаблонов
 #include "figure.tpp"

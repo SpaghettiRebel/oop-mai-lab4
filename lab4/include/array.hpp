@@ -24,7 +24,7 @@ public:
   void push_back(T &&v);
   template <typename... Args> void emplace_back(Args &&...args);
 
-  void remove_at(size_t idx); // удаляет элемент, сдвигая последующие влево
+  void remove_at(size_t idx);
   size_t size() const noexcept { return _size; }
   size_t capacity() const noexcept { return _cap; }
 
