@@ -6,8 +6,9 @@
 template <Scalar T> class Trapezoid : public Figure<T> {
 public:
   using PointT = Point<T>;
+
   Trapezoid() = default;
-  Trapezoid(T cx, T cy, T topA, T botB, T h);
+  Trapezoid(PointT tl, PointT tr, PointT br, PointT bl);
 
   Trapezoid(const Trapezoid &other);
   Trapezoid &operator=(const Trapezoid &other);
@@ -19,8 +20,9 @@ public:
   void read(std::istream &is) override;
 
 private:
-  std::vector<std::unique_ptr<PointT>> pts; // 4 vertices
-  void set_by_center(T cx, T cy, T a, T b, T h);
+  std::vector<std::unique_ptr<PointT>> pts; // tl, tr, br, bl
+  bool isValidTrapezoid() const;
+  double distance(const PointT &a, const PointT &b) const;
 };
 
 #include "trapezoid.tpp"

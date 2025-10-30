@@ -12,8 +12,14 @@ int main() {
   using T = double;
 
   Array<Rectangle<T>> arr_rects;
-  arr_rects.emplace_back(T(0), T(0), T(2), T(1));
-  arr_rects.emplace_back(T(1), T(1), T(3), T(2));
+  arr_rects.emplace_back(typename Rectangle<T>::PointT{-1, -0.5},
+                         typename Rectangle<T>::PointT{-1, 0.5},
+                         typename Rectangle<T>::PointT{1, -0.5},
+                         typename Rectangle<T>::PointT{1, 0.5});
+  arr_rects.emplace_back(typename Rectangle<T>::PointT{-0.5, -1},
+                         typename Rectangle<T>::PointT{-0.5, 1},
+                         typename Rectangle<T>::PointT{2, -1},
+                         typename Rectangle<T>::PointT{2, 1});
 
   std::cout << "Array<Rectangle<T>> (по значению):\n";
   for (size_t i = 0; i < arr_rects.size(); ++i) {
@@ -40,23 +46,43 @@ int main() {
       break;
     try {
       if (cmd == "1") {
-        std::cout << "Введите cx cy длина ширина: ";
-        T cx, cy, w, h;
-        std::cin >> cx >> cy >> w >> h;
-        arr.push_back(std::make_shared<Rectangle<T>>(cx, cy, w, h));
+        std::cout << "Введите 4 точки (x y для каждой): ";
+        T x1, y1, x2, y2, x3, y3, x4, y4;
+        std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+        auto rect = std::make_shared<Rectangle<T>>();
+        std::istringstream iss(std::to_string(x1) + " " + std::to_string(y1) +
+                               " " + std::to_string(x2) + " " +
+                               std::to_string(y2) + " " + std::to_string(x3) +
+                               " " + std::to_string(y3) + " " +
+                               std::to_string(x4) + " " + std::to_string(y4));
+        rect->read(iss);
+        arr.push_back(rect);
 
       } else if (cmd == "2") {
-        std::cout
-            << "Введите cx cy верхнее_основание нижнее_основание height: ";
-        T cx, cy, a, b, h;
-        std::cin >> cx >> cy >> a >> b >> h;
-        arr.push_back(std::make_shared<Trapezoid<T>>(cx, cy, a, b, h));
+        std::cout << "Введите 4 точки (x y для каждой): ";
+        T x1, y1, x2, y2, x3, y3, x4, y4;
+        std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+        auto trap = std::make_shared<Trapezoid<T>>();
+        std::istringstream iss(std::to_string(x1) + " " + std::to_string(y1) +
+                               " " + std::to_string(x2) + " " +
+                               std::to_string(y2) + " " + std::to_string(x3) +
+                               " " + std::to_string(y3) + " " +
+                               std::to_string(x4) + " " + std::to_string(y4));
+        trap->read(iss);
+        arr.push_back(trap);
 
       } else if (cmd == "3") {
-        std::cout << "Введите cx cy диагональ1 диагональ2: ";
-        T cx, cy, d1, d2;
-        std::cin >> cx >> cy >> d1 >> d2;
-        arr.push_back(std::make_shared<Rhombus<T>>(cx, cy, d1, d2));
+        std::cout << "Введите 4 точки (x y для каждой): ";
+        T x1, y1, x2, y2, x3, y3, x4, y4;
+        std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+        auto rhomb = std::make_shared<Rhombus<T>>();
+        std::istringstream iss(std::to_string(x1) + " " + std::to_string(y1) +
+                               " " + std::to_string(x2) + " " +
+                               std::to_string(y2) + " " + std::to_string(x3) +
+                               " " + std::to_string(y3) + " " +
+                               std::to_string(x4) + " " + std::to_string(y4));
+        rhomb->read(iss);
+        arr.push_back(rhomb);
 
       } else if (cmd == "p") {
         for (size_t i = 0; i < arr.size(); ++i) {

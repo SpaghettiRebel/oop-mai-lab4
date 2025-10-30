@@ -6,8 +6,9 @@
 template <Scalar T> class Rectangle : public Figure<T> {
 public:
   using PointT = Point<T>;
+
   Rectangle() = default;
-  Rectangle(T cx, T cy, T width, T height);
+  Rectangle(PointT ll, PointT lu, PointT rl, PointT ru);
 
   Rectangle(const Rectangle &other);
   Rectangle(Rectangle &&) noexcept = default;
@@ -22,7 +23,8 @@ public:
 
 private:
   std::vector<std::unique_ptr<PointT>> pts;
-  void set_by_center(T cx, T cy, T w, T h);
+  bool isValidRectangle() const;
+  double distance(const PointT &a, const PointT &b) const;
 };
 
 #include "rectangle.tpp"

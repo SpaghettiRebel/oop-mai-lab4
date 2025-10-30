@@ -21,8 +21,15 @@ static bool output_contains_area(const std::string &out, double area) {
 }
 
 TEST(RectangleTest, AreaAndCenter) {
-  Rectangle<double> r(1.5, -2.0, 4.0,
-                      4.0); // center x=1.5,y=-2.0, width=4 height=4
+  // Прямоугольник с вершинами: ll(-0.5,-2), lu(-0.5,2), rl(3.5,-2), ru(3.5,2)
+  // width=4.0, height=4.0, center=(1.5, 0)
+  // Но по условию center должен быть (1.5, -2.0) - значит сдвигаем
+  // ll(-0.5,-4), lu(-0.5,0), rl(3.5,-4), ru(3.5,0)
+  Rectangle<double> r(Point<double>{-0.5, -4.0}, // ll
+                      Point<double>{-0.5, 0.0},  // lu
+                      Point<double>{3.5, -4.0},  // rl
+                      Point<double>{3.5, 0.0}    // ru
+  );
   EXPECT_NEAR(r.area(), 16.0, EPS);
   auto c = r.center();
   EXPECT_NEAR(c.x, 1.5, EPS);
@@ -30,8 +37,10 @@ TEST(RectangleTest, AreaAndCenter) {
 }
 
 TEST(RectangleTest, IOAndClone) {
-  // формат read: cx cy width height
-  std::istringstream in("0.0 1.0 3.5 2.0");
+  // формат read: 4 пары координат (x y)
+  // Прямоугольник с center (0.0, 1.0), width=3.5, height=2.0
+  // ll=(-1.75, 0), lu=(-1.75, 2), rl=(1.75, 0), ru=(1.75, 2)
+  std::istringstream in("-1.75 0.0 -1.75 2.0 1.75 0.0 1.75 2.0");
   Rectangle<double> r;
   EXPECT_NO_THROW(r.read(in));
   EXPECT_NEAR(r.area(), 3.5 * 2.0, EPS);
@@ -51,7 +60,12 @@ TEST(RectangleTest, IOAndClone) {
 
 TEST(TrapezoidTest, AreaAndCenter) {
   // center 0,0; top a=2, bottom b=4, height=1 -> area = (2+4)/2 *1 = 3
-  Trapezoid<double> t(0.0, 0.0, 2.0, 4.0, 1.0);
+  // tl=(-1, 0.5), tr=(1, 0.5), br=(2, -0.5), bl=(-2, -0.5)
+  Trapezoid<double> t(Point<double>{-1.0, 0.5}, // tl
+                      Point<double>{1.0, 0.5},  // tr
+                      Point<double>{2.0, -0.5}, // br
+                      Point<double>{-2.0, -0.5} // bl
+  );
   EXPECT_NEAR(t.area(), 3.0, EPS);
   auto c = t.center();
   EXPECT_NEAR(c.x, 0.0, EPS);
@@ -65,8 +79,13 @@ TEST(TrapezoidTest, AreaAndCenter) {
 }
 
 TEST(RhombusTest, AreaAndIOClone) {
-  // diagonals d1=2, d2=2 => area = d1*d2/2 = 2
-  Rhombus<double> r(1.0, 2.0, 2.0, 2.0);
+  // center (1.0, 2.0), diagonals d1=2, d2=2 => area = d1*d2/2 = 2
+  // left=(0, 2), top=(1, 3), right=(2, 2), bottom=(1, 1)
+  Rhombus<double> r(Point<double>{0.0, 2.0}, // left
+                    Point<double>{1.0, 3.0}, // top
+                    Point<double>{2.0, 2.0}, // right
+                    Point<double>{1.0, 1.0}  // bottom
+  );
   EXPECT_NEAR(r.area(), 2.0, EPS);
   auto c = r.center();
   EXPECT_NEAR(c.x, 1.0, EPS);
@@ -83,14 +102,33 @@ TEST(RhombusTest, AreaAndIOClone) {
 }
 
 TEST(PolymorphicEqualityAndSumArea, EqualAndSum) {
-  Rectangle<double> a(0, 0, 2.0, 2.0); // area 4
-  Rectangle<double> b(0, 0, 2.0, 2.0); // area 4
+  // Rectangle center (0,0), width=2.0, height=2.0 => area 4
+  // ll=(-1,-1), lu=(-1,1), rl=(1,-1), ru=(1,1)
+  Rectangle<double> a(Point<double>{-1.0, -1.0}, Point<double>{-1.0, 1.0},
+                      Point<double>{1.0, -1.0}, Point<double>{1.0, 1.0});
+  Rectangle<double> b(Point<double>{-1.0, -1.0}, Point<double>{-1.0, 1.0},
+                      Point<double>{1.0, -1.0}, Point<double>{1.0, 1.0});
   EXPECT_TRUE(a == b);
 
   std::vector<std::unique_ptr<Figure<double>>> arr;
-  arr.push_back(std::make_unique<Rectangle<double>>(0.0, 0.0, 2.0, 2.0)); // 4
-  arr.push_back(std::make_unique<Rectangle<double>>(0.0, 0.0, 3.0, 2.0)); // 6
-  arr.push_back(std::make_unique<Rhombus<double>>(0.0, 0.0, 2.0, 2.0));   // 2
+
+  // Rectangle center (0,0), width=2, height=2 => area 4
+  arr.push_back(std::make_unique<Rectangle<double>>(
+      Point<double>{-1.0, -1.0}, Point<double>{-1.0, 1.0},
+      Point<double>{1.0, -1.0}, Point<double>{1.0, 1.0}));
+
+  // Rectangle center (0,0), width=3, height=2 => area 6
+  arr.push_back(std::make_unique<Rectangle<double>>(
+      Point<double>{-1.5, -1.0}, Point<double>{-1.5, 1.0},
+      Point<double>{1.5, -1.0}, Point<double>{1.5, 1.0}));
+
+  // Rhombus center (0,0), d1=2, d2=2 => area 2
+  arr.push_back(
+      std::make_unique<Rhombus<double>>(Point<double>{-1.0, 0.0}, // left
+                                        Point<double>{0.0, 1.0},  // top
+                                        Point<double>{1.0, 0.0},  // right
+                                        Point<double>{0.0, -1.0}  // bottom
+                                        ));
 
   double sum = 0.0;
   for (auto &f : arr)
@@ -100,7 +138,13 @@ TEST(PolymorphicEqualityAndSumArea, EqualAndSum) {
 }
 
 TEST(CloneThroughBasePointer, PolymorphicCopy) {
-  Rhombus<double> r(5.0, 5.0, 1.5, 2.0);
+  // Rhombus center (5,5), d1=1.5, d2=2.0
+  // left=(4.25, 5), top=(5, 6), right=(5.75, 5), bottom=(5, 4)
+  Rhombus<double> r(Point<double>{4.25, 5.0}, // left
+                    Point<double>{5.0, 6.0},  // top
+                    Point<double>{5.75, 5.0}, // right
+                    Point<double>{5.0, 4.0}   // bottom
+  );
   Figure<double> *base = &r;
   auto copy = base->clone();
   ASSERT_NE(copy, nullptr);

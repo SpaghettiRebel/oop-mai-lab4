@@ -6,8 +6,9 @@
 template <Scalar T> class Rhombus : public Figure<T> {
 public:
   using PointT = Point<T>;
+
   Rhombus() = default;
-  Rhombus(T cx, T cy, T d1, T d2);
+  Rhombus(PointT left, PointT top, PointT right, PointT bottom);
 
   Rhombus(const Rhombus &other);
   Rhombus &operator=(const Rhombus &other);
@@ -20,7 +21,8 @@ public:
 
 private:
   std::vector<std::unique_ptr<PointT>> pts;
-  void set_by_center(T cx, T cy, T d1, T d2);
+  bool isValidRhombus() const;
+  double distance(const PointT &a, const PointT &b) const;
 };
 
 #include "rhombus.tpp"

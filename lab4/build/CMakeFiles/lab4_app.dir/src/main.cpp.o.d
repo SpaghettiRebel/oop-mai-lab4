@@ -1,5 +1,5 @@
 CMakeFiles/lab4_app.dir/src/main.cpp.o: \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/src/main.cpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/src/main.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -207,12 +207,12 @@ CMakeFiles/lab4_app.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/ranges_algobase.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/array.hpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/array.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/array.tpp \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/rectangle.hpp \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/figure.hpp \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/point.hpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/array.tpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/rectangle.hpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/figure.hpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/point.hpp \
  /usr/include/c++/13/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -236,12 +236,12 @@ CMakeFiles/lab4_app.dir/src/main.cpp.o: \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/figure.tpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/figure.tpp \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/rectangle.tpp \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/rhombus.hpp \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/rhombus.tpp \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/trapezoid.hpp \
- /mnt/c/Users/Вячеслав/Desktop/oop/lab4/lab4/include/trapezoid.tpp
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/rectangle.tpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/rhombus.hpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/rhombus.tpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/trapezoid.hpp \
+ /mnt/c/Users/Вячеслав/Desktop/oop/lab4/oop-mai-lab4/lab4/include/trapezoid.tpp
